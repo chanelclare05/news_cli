@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "news_cli/version"
+require_relative "./news_cli/version"
 
 require 'bundler'
 Bundler.require
