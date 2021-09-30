@@ -21,4 +21,11 @@ class News
     def self.all
         @@all
     end 
+
+    def self.find_news(news_title)
+        self.all.find do |news|
+            news.title == news_title 
+        end 
+
+    end 
 end 

@@ -42,14 +42,23 @@ class CLI
         menu
     end 
 
+    def news_selection 
+        puts "Select a news article for more details"
+
+        selection = user_input
+
+        # we will query the news class to find that specific news list to expand on 
+        News.find_news(selection)
+    end 
+
     #based on user selection, show a list of news
     #give an error message
     #exit the program 
-
     def menu
         selection = user_input
         if selection == "y" 
             news_list #print the news list 
+            menu
         elsif selection == "exit"
             goodbye #give the user a goodbye message
         else 
