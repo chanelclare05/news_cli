@@ -33,7 +33,13 @@ class CLI
     end 
 
     def goodbye
-        "You chose to exit. That's okay. I won't be hurt."
+        puts "You chose to exit. That's okay. I won't be hurt."
+    end 
+
+    def invalid
+        puts "Hmm, your input was invalid. Please try again."
+        puts "Input 'y to see the news list, 'exit' to leave News Hub."
+        menu
     end 
 
     #based on user selection, show a list of news
@@ -42,21 +48,12 @@ class CLI
 
     def menu
         selection = user_input
-        if selection == "y"
-            #print the news list 
-            puts "you clicked yes!"
-            news_list
+        if selection == "y" 
+            news_list #print the news list 
         elsif selection == "exit"
-            #give the user a goodbye message
-            puts "you want to exit, boo"
-            goodbye
-
+            goodbye #give the user a goodbye message
         else 
-            #give an error message and make user selection again
-            puts "this is invalid. Select again"
-            puts ""
-            puts "Input 'y to see the news list, 'exit' to leave News Hub."
-            menu
+            invalid #give an error message and make user selection again
         end 
     end 
 
