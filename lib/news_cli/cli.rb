@@ -32,6 +32,10 @@ class CLI
         end 
     end 
 
+    def goodbye
+        "You chose to exit. That's okay. I won't be hurt."
+    end 
+
     #based on user selection, show a list of news
     #give an error message
     #exit the program 
@@ -45,6 +49,7 @@ class CLI
         elsif selection == "exit"
             #give the user a goodbye message
             puts "you want to exit, boo"
+            goodbye
 
         else 
             #give an error message and make user selection again
