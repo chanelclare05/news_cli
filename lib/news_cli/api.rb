@@ -28,7 +28,7 @@ end
 #what do I want from the api 
 #First Level: (source) Title
 #Second Level: Title, Description, author, source, published date 
-#Third Level (if possible): Content 
+#Third Level: Open URL, email article to a friend 
 
 
 #Stretch Goals 

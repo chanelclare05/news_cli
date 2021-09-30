@@ -4,7 +4,7 @@
 class News
     @@all = []
 
-    attr_accessor :title, :description, :author, :source
+    attr_accessor :title, :description, :author, :source, :content, :url
 
     # def initialize(title, description, author)
     #     @title = title
@@ -29,9 +29,9 @@ class News
         @@all
     end 
 
-    def self.find_news(news_title)
+    def self.find_news(selection)
         self.all.find do |news|
-            news.title == news_title 
+            news.title == selection 
         end 
     end 
 end 

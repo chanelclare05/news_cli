@@ -22,12 +22,17 @@ class CLI
     
     def greet(name)
         puts "#{name}, that is a great name!"
-        puts "Would you like to view the top news of the day, #{name}?"
-        puts "Input 'y to see the news list, 'exit' to leave News Hub."
+        puts "Would you like to view the trending headlines of the day?"
+        input
+    end 
+
+    def input
+        puts "Input 'y' to see trending news or 'exit' to leave News Hub."
         menu
     end 
 
     def news_list
+        puts "Select a news article for more details"
         News.all.each.with_index(1) do |article, index|
             puts "#{index}. #{article.title}"
         end 
@@ -44,7 +49,7 @@ class CLI
     end 
 
     def news_selection 
-        puts "Select a news article for more details"
+
         selection = user_input
         # #Query the news class to find that specific news list to expand on 
         news = News.find_news(selection)
@@ -58,14 +63,21 @@ class CLI
         puts "Description: #{news.description}"
         puts ""
         puts "Author: #{news.author}"
+        puts ""
+        puts "Content: #{news.content}"
+        puts ""
+        # puts "URL: #{news.url}"
+        input
+
     end 
+
 
     #based on user selection, show a list of news
     #give an error message
     #exit the program 
     def menu
         selection = user_input
-        if selection == "y" 
+        if %w(yes YES Y y).include? selection
             news_list #print the news list 
             news_selection
         elsif selection == "exit"
