@@ -6,12 +6,18 @@ class News
 
     attr_accessor :title, :description, :author, :source
 
-    def initialize(title, description, author)
-        @title = title
-        @description = description
-        @author = author
-        @source = source 
-        save
+    # def initialize(title, description, author)
+    #     @title = title
+    #     @description = description
+    #     @author = author
+    #     @source = source 
+    #     save
+    # end 
+
+    def initialize(news_hash)
+        news_hash.each do |k, v|
+            self.send("#{k}=", v) if self.respond_to?("#{k}=")
+        end 
     end 
 
     def save 
@@ -26,6 +32,5 @@ class News
         self.all.find do |news|
             news.title == news_title 
         end 
-
     end 
 end 

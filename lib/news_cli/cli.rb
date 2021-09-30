@@ -11,6 +11,7 @@ class CLI
 
     def start
         puts "Welcome to your News Hub!"
+        API.get_data
         puts "Let's start with your name: "
         greet(user_input)
     end 
