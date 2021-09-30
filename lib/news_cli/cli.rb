@@ -46,14 +46,17 @@ class CLI
     def news_selection 
         puts "Select a news article for more details"
         selection = user_input
-        puts "#{selection}"
         # #Query the news class to find that specific news list to expand on 
         news = News.find_news(selection)
+        news_details(news)
     end 
 
     def news_details(news)
+        puts ""
         puts "Title: #{news.title}"
+        puts ""
         puts "Description: #{news.description}"
+        puts ""
         puts "Author: #{news.author}"
     end 
 
