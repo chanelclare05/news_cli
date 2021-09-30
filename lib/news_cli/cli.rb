@@ -28,8 +28,8 @@ class CLI
     end 
 
     def news_list
-        ["article 1", "article 2", "article 3"].each.with_index(1) do |article, index|
-            puts "#{index}. #{article}"
+        News.all.each.with_index(1) do |article, index|
+            puts "#{index}. #{article.title}"
         end 
     end 
 
@@ -48,7 +48,13 @@ class CLI
         selection = user_input
         puts "#{selection}"
         # #Query the news class to find that specific news list to expand on 
-        # News.find_news(selection)
+        news = News.find_news(selection)
+    end 
+
+    def news_details(news)
+        puts "Title: #{news.title}"
+        puts "Description: #{news.description}"
+        puts "Author: #{news.author}"
     end 
 
     #based on user selection, show a list of news
