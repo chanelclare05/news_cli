@@ -4,7 +4,7 @@
 class News
     @@all = []
 
-    attr_accessor :title, :description, :author, :source, :content, :url
+    attr_accessor :title, :description, :author, :source, :content, :url, :publishedAt
 
     def initialize(news_hash)
         news_hash.each do |k, v|

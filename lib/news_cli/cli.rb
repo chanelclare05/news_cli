@@ -4,6 +4,8 @@
 #Would you like todays news today?
 #Select a news story to see more! 
 
+require 'date'
+
 
 class CLI 
 
@@ -74,6 +76,7 @@ class CLI
         puts ""
         puts "Content: #{news.content}"
         puts ""
+        puts "Published Date: #{news.publishedAt.gsub(/T.*/, '')}"
         # puts "URL: #{news.url}"
         input
 
