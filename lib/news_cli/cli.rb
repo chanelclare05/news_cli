@@ -49,16 +49,22 @@ class CLI
 
     def invalid
         puts "Hmm, your input was invalid. Please try again."
-        puts "Input 'y to see the news list, 'exit' to leave News Hub."
+        puts "Input 'y' to see the news list, 'exit' to leave News Hub."
         menu
     end 
 
     def news_selection 
+        selection = user_input 
 
-        selection = user_input.to_i
-        if selection > News.all.size 
-            puts "Uh Oh.. The number you selected is invalid. Please try again and chose a valid entry: "
+        if %w('a'..'z').include? selection
+            puts "Uh Oh.. Your entry doesn't seem to be a number! Please try again: "
             news_selection
+        else         
+            selection = selection.to_i
+            if selection > News.all.size 
+                puts "Uh Oh.. The number you selected is invalid. Please try again and chose a valid entry: "
+                news_selection
+            end 
         end 
         selection = selection - 1
         news = News.find_news(selection)
@@ -86,11 +92,13 @@ class CLI
     #give an error message
     #exit the program 
     def menu
-        selection = user_input.downcase
+        selection = user_input
         if %w(yes y yeah sure yep yup yea ye).include? selection
             news_list #print the news list 
             news_selection
-        elsif selection == "exit"
+        elsif %w(no n nah nay never yup).include? selection
+            puts "No it is. See you later!"
+        elsif selection == "exit" || 
             goodbye #give the user a goodbye message
         else 
             invalid #give an error message and make user selection again
