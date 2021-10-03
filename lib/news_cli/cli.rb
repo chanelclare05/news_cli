@@ -27,8 +27,9 @@ class CLI
     end 
     
     def greet(name)
-        puts "#{name}, that is a great name!"
-        puts "Would you like to view the trending headlines of the day? [y/n]"
+        puts "You have an awesome name, #{name.capitalize}"
+        puts ""
+        puts "Would you like to view the trending headlines of the day, #{name.capitalize}? [y/n]"
         input
     end 
 
@@ -73,19 +74,36 @@ class CLI
 
     def news_details(news)
         puts ""
-        puts "Title: #{news.title}"
+        puts "Title: #{news.title == nil ? "NA" : news.title}"
+        puts "------------------------------------------------------------------------------------"
+        puts "Description: #{news.description == nil ? "NA" : news.description}"
+        puts "------------------------------------------------------------------------------------"
+        puts "Author: #{news.author == nil ? "NA" : news.author} / Published Date: #{news.publishedAt == nil ? "NA" : news.publishedAt.gsub(/T.*/, '')}"
         puts ""
-        puts "Description: #{news.description}"
-        puts ""
-        puts "Author: #{news.author}"
-        puts ""
-        # puts "Content: #{news.content}"
-        # puts ""
-        puts "Published Date: #{news.publishedAt.gsub(/T.*/, '')}"
-        # puts "URL: #{news.url}"
-        input
-
+        news_url = news.url
+        open_link(news_url)
     end 
+
+    def open_link(news_url)
+        puts "Would you like to open this page up in your browser? [y/n]"
+        selection = user_input
+        if %w(yes y yeah sure yep yup yea ye).include? selection
+            system("open", news_url)  #open up the browser page 
+            news_list #go back to the main menu
+        elsif %w(no n nah nay never yup).include? selection
+            #message and go back to the main menu
+            puts "Not interesting? Okay, here is the original list: " 
+            news_list
+        elsif selection == "exit" || 'q' 
+             goobye
+        else 
+            invalid #give an error message and make user selection again
+        end 
+        news_list
+        menu
+    end 
+
+
 
 
     #based on user selection, show a list of news
@@ -98,7 +116,7 @@ class CLI
             news_selection
         elsif %w(no n nah nay never yup).include? selection
             puts "No it is. See you later!"
-        elsif selection == "exit" || 
+        elsif selection == "exit" || 'q'
             goodbye #give the user a goodbye message
         else 
             invalid #give an error message and make user selection again
