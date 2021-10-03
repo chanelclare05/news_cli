@@ -53,7 +53,7 @@ class CLI
 
     def news_selection 
 
-        selection = user_input
+        selection = user_input.to_i
         # #Query the news class to find that specific news list to expand on 
         news = News.find_news(selection)
         news_details(news)

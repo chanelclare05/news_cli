@@ -23,7 +23,7 @@ class News
 
     def self.find_news(selection)
         self.all.find do |news|
-            news.title == selection 
+            @@all.find_index(news) == selection
         end 
     end 
 end 
