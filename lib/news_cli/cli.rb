@@ -10,9 +10,13 @@ class CLI
     # a method to behave as an entry way to the cli, called upon instantialization 
 
     def start
-        puts "Welcome to your News Hub!"
+        system("clear")
+        puts "One moment... This application is currently loading."
         API.get_data
-        puts "Let's start with your name: "
+        puts ""
+        puts ""
+        puts ""
+        puts "Welcome to your News Hub. Let's start with your name: "
         greet(user_input)
     end 
 
@@ -22,12 +26,11 @@ class CLI
     
     def greet(name)
         puts "#{name}, that is a great name!"
-        puts "Would you like to view the trending headlines of the day?"
+        puts "Would you like to view the trending headlines of the day? [y/n]"
         input
     end 
 
     def input
-        puts "Input 'y' to see trending news or 'exit' to leave News Hub."
         menu
     end 
 
@@ -54,6 +57,11 @@ class CLI
         # #Query the news class to find that specific news list to expand on 
         news = News.find_news(selection)
         news_details(news)
+
+        # def print_course_details input
+        #     CourseApp::Course.all[input - 1].print
+        #     prompt_user_general
+        # end
     end 
 
     def news_details(news)

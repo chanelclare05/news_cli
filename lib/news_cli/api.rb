@@ -6,7 +6,7 @@ require 'pry'
 
 class API
 
-    BASE_URL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=152739ec892148ed8d2495c65dfb92d3"
+    BASE_URL = "https://newsapi.org/v2/top-headlines?country=us&pageSize=10&apiKey=152739ec892148ed8d2495c65dfb92d3"
     API_KEY = "152739ec892148ed8d2495c65dfb92d3"
 
     def self.get_data
