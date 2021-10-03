@@ -56,14 +56,13 @@ class CLI
     def news_selection 
 
         selection = user_input.to_i
-        # #Query the news class to find that specific news list to expand on 
+        if selection > News.all.size 
+            puts "Uh Oh.. The number you selected is invalid. Please try again and chose a valid entry: "
+            news_selection
+        end 
+        selection = selection - 1
         news = News.find_news(selection)
         news_details(news)
-
-        # def print_course_details input
-        #     CourseApp::Course.all[input - 1].print
-        #     prompt_user_general
-        # end
     end 
 
     def news_details(news)
@@ -74,8 +73,8 @@ class CLI
         puts ""
         puts "Author: #{news.author}"
         puts ""
-        puts "Content: #{news.content}"
-        puts ""
+        # puts "Content: #{news.content}"
+        # puts ""
         puts "Published Date: #{news.publishedAt.gsub(/T.*/, '')}"
         # puts "URL: #{news.url}"
         input
@@ -87,8 +86,8 @@ class CLI
     #give an error message
     #exit the program 
     def menu
-        selection = user_input
-        if %w(yes YES Y y).include? selection
+        selection = user_input.downcase
+        if %w(yes y yeah sure yep yup yea ye).include? selection
             news_list #print the news list 
             news_selection
         elsif selection == "exit"
