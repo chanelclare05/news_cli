@@ -19,7 +19,6 @@ class CLI
         space_divider
         clear_screen
         puts "Welcome to your News Hub. Let's start with your name: "
-        puts Time.new
         greet(user_input)
     end 
 
