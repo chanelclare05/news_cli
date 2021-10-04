@@ -15,9 +15,9 @@ class CLI
         system("clear")
         puts "One moment... This application is currently loading."
         API.get_data
-        puts ""
-        puts ""
-        puts ""
+        space_divider
+        space_divider
+        space_divider
         puts "Welcome to your News Hub. Let's start with your name: "
         greet(user_input)
     end 
@@ -27,31 +27,35 @@ class CLI
     end 
     
     def greet(name)
+        space_divider
+        hardline_divider
+        space_divider
         puts "You have an awesome name, #{name.capitalize}"
-        puts ""
+        space_divider
         puts "#{name.capitalize}, would you like to view the trending headlines of the day? [y/n]"
-        input
-    end 
-
-    def input
         menu
     end 
 
     def news_list
-        puts ""
+        space_divider
         puts "Here is the list of the top trending news today."
-        puts "------------------------------------------------------------------------------------"
+        hardline_divider
         News.all.each.with_index(1) do |article, index|
             puts "#{index}. #{article.title}"
         end 
-        puts "------------------------------------------------------------------------------------"
+        hardline_divider
         puts "Select an entry based on the number."
-        puts ""
+        space_divider
     end 
 
     def goodbye
+        space_divider
+        hardline_divider
+        space_divider
         puts "You chose to exit. That's okay. I won't be hurt."
-        puts ""
+        space_divider
+        hardline_divider
+        space_divider
     end 
 
     def invalid
@@ -62,8 +66,9 @@ class CLI
 
     def news_selection 
         selection = user_input 
-
-        if %w('a'..'z').include? selection
+        if %w(exit q quit).include? selection 
+            goodbye 
+        elsif  %w('a'..'z').include? selection
             puts "Uh Oh.. Your entry doesn't seem to be a number! Please try again: "
             news_selection
         else         
@@ -72,20 +77,29 @@ class CLI
                 puts "Uh Oh.. The number you selected is invalid. Please try again and chose a valid entry: "
                 news_selection
             end 
+            selection = selection - 1
+            news = News.find_news(selection)
+            news_details(news)
         end 
-        selection = selection - 1
-        news = News.find_news(selection)
-        news_details(news)
+
+    end 
+
+    def hardline_divider
+        puts "------------------------------------------------------------------------------------"
+    end
+
+    def space_divider
+        puts ""
     end 
 
     def news_details(news)
-        puts ""
+        space_divider
         puts "Title: #{news.title == nil ? "NA" : news.title}"
-        puts "------------------------------------------------------------------------------------"
+        hardline_divider
         puts "Description: #{news.description == nil ? "NA" : news.description}"
-        puts "------------------------------------------------------------------------------------"
+        hardline_divider
         puts "Author: #{news.author == nil ? "NA" : news.author} / Published Date: #{news.publishedAt == nil ? "NA" : news.publishedAt.gsub(/T.*/, '')}"
-        puts ""
+        space_divider
         news_url = news.url
         open_link(news_url)
     end 
@@ -93,28 +107,22 @@ class CLI
     def open_link(news_url)
         puts "Would you like to open this page up in your browser? [y/n]"
         selection = user_input
-        if %w(yes y yeah sure yep yup yea ye).include? selection
+        if %w(exit q quit).include? selection 
+            goodbye
+        elsif %w(yes y yeah sure yep yup yea ye).include? selection
             system("open", news_url)  #open up the browser page 
             news_list #go back to the main menu
-        elsif %w(no n nah nay never yup).include? selection
+            news_selection
+        elsif %w(no n nah nay never).include? selection
             #message and go back to the main menu
             puts "Not interesting? Okay, here is the original list: " 
             news_list
-        elsif selection == "exit" || 'q' 
-             goobye
+            news_selection
         else 
             invalid #give an error message and make user selection again
-        end 
-        news_list
-        news_selection
+        end         
     end 
 
-
-
-
-    #based on user selection, show a list of news
-    #give an error message
-    #exit the program 
     def menu
         selection = user_input
         if %w(yes y yeah sure yep yup yea ye).include? selection
@@ -122,7 +130,7 @@ class CLI
             news_selection
         elsif %w(no n nah nay never yup).include? selection
             puts "No it is. See you later!"
-        elsif selection == "exit" || 'q'
+        elsif %w(exit q quit).include? selection 
             goodbye #give the user a goodbye message
         else 
             invalid #give an error message and make user selection again
