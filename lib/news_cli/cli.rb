@@ -17,6 +17,7 @@ class CLI
         space_divider
         space_divider
         space_divider
+        clear_screen
         puts "Welcome to your News Hub. Let's start with your name: "
         greet(user_input)
     end 
@@ -27,12 +28,11 @@ class CLI
     end 
     
     def greet(name)
+        clear_screen
         if %w(exit q quit goodbye bye).include? name 
             goodbye 
         else 
-            space_divider
-            hardline_divider
-            space_divider
+            clear_screen
             puts "You have an awesome name, #{name.capitalize}"
             space_divider
             puts "#{name.capitalize}, would you like to view the trending headlines of the day? [y/n]"
@@ -42,7 +42,6 @@ class CLI
 
     def news_list
         space_divider
-        space_divider
         puts "Here is the list of the top trending news today."
         hardline_divider
         space_divider
@@ -51,7 +50,6 @@ class CLI
         end 
         hardline_divider
         puts "Select an entry based on the number."
-        space_divider
     end 
 
     def goodbye
@@ -132,8 +130,6 @@ class CLI
         puts "Author: #{news.author == nil ? "NA" : news.author} / Published Date: #{news.publishedAt == nil ? "NA" : news.publishedAt.gsub(/T.*/, '')} / Source: #{news.source["name"] == nil ? "NA" : news.source["name"]} "
         space_divider
         space_divider
-        space_divider
-        space_divider
         news_url = news.url
         open_link(news_url)
     end 
@@ -170,6 +166,7 @@ class CLI
 
     def menu
         selection = user_input
+        clear_screen
         if %w(yes y yeah sure yep yup yea ye).include? selection
             news_list #print the news list 
             news_selection
