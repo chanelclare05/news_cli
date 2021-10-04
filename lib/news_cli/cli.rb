@@ -55,6 +55,7 @@ class CLI
         puts "Select an entry based on the number."
     end 
 
+
     def goodbye
         clear_screen
         space_divider
@@ -98,6 +99,7 @@ class CLI
         if %w(exit q quit goodbye bye).include? selection 
             goodbye 
         elsif  %w('a'..'z').include? selection
+            clear_screen
             puts "Uh Oh.. Your entry doesn't seem to be a number! Please try again: "
             news_selection
         else         
@@ -174,7 +176,9 @@ class CLI
             news_list #print the news list 
             news_selection
         elsif %w(no n nah nay never yup).include? selection
+            space_divider
             puts "No it is. See you later!"
+            space_divider
         elsif %w(exit q quit goodbye bye).include? selection 
             goodbye #give the user a goodbye message
         else 

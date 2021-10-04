@@ -19,18 +19,3 @@ class API
 
 end 
 
-
-
-
-
-
-
-#what do I want from the api 
-#First Level: (source) Title
-#Second Level: Title, Description, author, source, published date 
-#Third Level: Open URL, email article to a friend 
-
-
-#Stretch Goals 
-#Change language and country 
-#change query 
