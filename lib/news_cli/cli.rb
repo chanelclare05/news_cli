@@ -27,13 +27,14 @@ class CLI
     end 
     
     def greet(name)
+        name ==  "exit" ? goodbye : (
         space_divider
         hardline_divider
         space_divider
         puts "You have an awesome name, #{name.capitalize}"
         space_divider
         puts "#{name.capitalize}, would you like to view the trending headlines of the day? [y/n]"
-        menu
+        menu)
     end 
 
     def news_list
@@ -66,7 +67,7 @@ class CLI
 
     def news_selection 
         selection = user_input 
-        if %w(exit q quit).include? selection 
+        if %w(exit q quit goodbye).include? selection 
             goodbye 
         elsif  %w('a'..'z').include? selection
             puts "Uh Oh.. Your entry doesn't seem to be a number! Please try again: "
@@ -107,7 +108,7 @@ class CLI
     def open_link(news_url)
         puts "Would you like to open this page up in your browser? [y/n]"
         selection = user_input
-        if %w(exit q quit).include? selection 
+        if %w(exit q quit goodbye).include? selection 
             goodbye
         elsif %w(yes y yeah sure yep yup yea ye).include? selection
             system("open", news_url)  #open up the browser page 
@@ -130,7 +131,7 @@ class CLI
             news_selection
         elsif %w(no n nah nay never yup).include? selection
             puts "No it is. See you later!"
-        elsif %w(exit q quit).include? selection 
+        elsif %w(exit q quit goodbye).include? selection 
             goodbye #give the user a goodbye message
         else 
             invalid #give an error message and make user selection again
