@@ -12,3 +12,6 @@ gem 'rest-client'
 
 
 gem 'require_all'
+
+require 'colorize' # Extends String class
+require 'colorized_string' #add ColorizedString class
