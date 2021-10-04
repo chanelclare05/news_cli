@@ -29,7 +29,7 @@ class CLI
     def greet(name)
         puts "You have an awesome name, #{name.capitalize}"
         puts ""
-        puts "Would you like to view the trending headlines of the day, #{name.capitalize}? [y/n]"
+        puts "#{name.capitalize}, would you like to view the trending headlines of the day? [y/n]"
         input
     end 
 
@@ -38,14 +38,20 @@ class CLI
     end 
 
     def news_list
-        puts "Select a news article for more details"
+        puts ""
+        puts "Here is the list of the top trending news today."
+        puts "------------------------------------------------------------------------------------"
         News.all.each.with_index(1) do |article, index|
             puts "#{index}. #{article.title}"
         end 
+        puts "------------------------------------------------------------------------------------"
+        puts "Select an entry based on the number."
+        puts ""
     end 
 
     def goodbye
         puts "You chose to exit. That's okay. I won't be hurt."
+        puts ""
     end 
 
     def invalid
@@ -100,7 +106,7 @@ class CLI
             invalid #give an error message and make user selection again
         end 
         news_list
-        menu
+        news_selection
     end 
 
 
