@@ -19,6 +19,7 @@ class CLI
         space_divider
         clear_screen
         puts "Welcome to your News Hub. Let's start with your name: "
+        puts Time.new
         greet(user_input)
     end 
 
@@ -43,12 +44,15 @@ class CLI
     def news_list
         space_divider
         puts "Here is the list of the top trending news today."
+        space_divider
         hardline_divider
         space_divider
         News.all.each.with_index(1) do |article, index|
             puts "#{index}. #{article.title}"
+            space_divider
         end 
         hardline_divider
+        space_divider
         puts "Select an entry based on the number."
     end 
 
