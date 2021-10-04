@@ -98,7 +98,7 @@ class CLI
         hardline_divider
         puts "Description: #{news.description == nil ? "NA" : news.description}"
         hardline_divider
-        puts "Author: #{news.author == nil ? "NA" : news.author} / Published Date: #{news.publishedAt == nil ? "NA" : news.publishedAt.gsub(/T.*/, '')}"
+        puts "Author: #{news.author == nil ? "NA" : news.author} / Published Date: #{news.publishedAt == nil ? "NA" : news.publishedAt.gsub(/T.*/, '')} / Source: #{news.source["name"] == nil ? "NA" : news.source["name"]} "
         space_divider
         news_url = news.url
         open_link(news_url)
